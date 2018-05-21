@@ -10,21 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.izbicki.jakub.library.libraryhw.book.dto.BookDto;
 import pl.izbicki.jakub.library.libraryhw.book.service.BookService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/book")
-public class BookController {
+@RequestMapping("/category")
+public class CategoryController {
 
     private final BookService bookService;
 
     @Autowired
-    public BookController(final BookService bookService) {
+    public CategoryController(final BookService bookService) {
         this.bookService = bookService;
     }
 
-    @GetMapping("/{isbn}")
-    public ResponseEntity getBookByIsbn(@PathVariable(value = "isbn") final String isbn) {
-        final BookDto bookByIsbn = bookService.getBookByIsbn(isbn);
+    @GetMapping("/{categoryName}/books")
+    public ResponseEntity getBooksByCategory(@PathVariable(value = "categoryName") final String categoryName) {
+        final List<BookDto> booksByCategory = bookService.getBooksByCategory(categoryName);
 
-        return new ResponseEntity(bookByIsbn, HttpStatus.OK);
+        return new ResponseEntity(booksByCategory, HttpStatus.OK);
     }
+
 }

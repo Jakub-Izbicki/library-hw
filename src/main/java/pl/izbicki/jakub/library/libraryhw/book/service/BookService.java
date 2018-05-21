@@ -7,7 +7,9 @@ import pl.izbicki.jakub.library.libraryhw.book.dto.BookDto;
 import pl.izbicki.jakub.library.libraryhw.book.repository.BookRepository;
 import pl.izbicki.jakub.library.libraryhw.core.exception.entity.NotFoundException;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -31,5 +33,15 @@ public class BookService {
         }
 
         return BookDto.from(book.get());
+    }
+
+    public List<BookDto> getBooksByCategory(String categoryName) {
+        final List<Book> books = bookRepository.selectForObject()
+                .where(book -> book.getCategories().contains(categoryName))
+                .execute();
+
+        return books.stream()
+                .map(BookDto::from)
+                .collect(Collectors.toList());
     }
 }

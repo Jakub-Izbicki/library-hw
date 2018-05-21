@@ -8,6 +8,8 @@ import pl.izbicki.jakub.library.libraryhw.book.dao.sale.SaleInfo;
 import pl.izbicki.jakub.library.libraryhw.book.dao.volume.IndustryIdentifier;
 import pl.izbicki.jakub.library.libraryhw.book.dao.volume.VolumeInfo;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -33,6 +35,14 @@ public class Book {
 
     public String getIsbn() {
         return provideIndustryIdentifierOrId();
+    }
+
+    public List<String> getCategories() {
+        if (isNull(volumeInfo) || isNull(volumeInfo.getCategories())) {
+            return Collections.emptyList();
+        }
+
+        return volumeInfo.getCategories();
     }
 
     private String provideIndustryIdentifierOrId() {
