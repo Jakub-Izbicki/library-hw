@@ -35,7 +35,7 @@ public class RepositoryTest {
         final List<Point> points = testRepository.selectForObject().execute();
 
         // then
-        assertThat(points).containsExactly(points.get(0), points.get(1));
+        assertThat(points).containsExactly(this.points.get(0), this.points.get(1));
     }
 
     @Test

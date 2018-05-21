@@ -5,11 +5,13 @@ import lombok.Getter;
 @Getter
 public class NotFoundException extends RuntimeException {
 
+    private static final String MESSAGE = "No results found";
+
     private final String entity;
     private final String identifier;
 
-    public NotFoundException(final String message, final String entity, final String identifier) {
-        super(message);
+    public NotFoundException(final String entity, final String identifier) {
+        super(MESSAGE);
         this.entity = entity;
         this.identifier = identifier;
     }

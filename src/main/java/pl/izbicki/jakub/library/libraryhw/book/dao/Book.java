@@ -38,11 +38,20 @@ public class Book {
     }
 
     public List<String> getCategories() {
-        if (isNull(volumeInfo) || isNull(volumeInfo.getCategories())) {
-            return Collections.emptyList();
-        }
+        return Optional.ofNullable(volumeInfo)
+                .map(VolumeInfo::getCategories)
+                .orElse(Collections.emptyList());
+    }
 
-        return volumeInfo.getCategories();
+    public Optional<Double> getAverageRating() {
+        return Optional.ofNullable(volumeInfo)
+                .map(VolumeInfo::getAverageRating);
+    }
+
+    public List<String> getAuthors() {
+        return Optional.ofNullable(volumeInfo)
+                .map(VolumeInfo::getAuthors)
+                .orElse(Collections.emptyList());
     }
 
     private String provideIndustryIdentifierOrId() {

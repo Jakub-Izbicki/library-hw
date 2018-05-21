@@ -29,7 +29,7 @@ public class BookService {
                 .findAny();
 
         if (!book.isPresent()) {
-            throw new NotFoundException("No results found", Book.class.getSimpleName(), isbn);
+            throw new NotFoundException(Book.class.getSimpleName(), isbn);
         }
 
         return BookDto.from(book.get());

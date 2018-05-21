@@ -29,5 +29,4 @@ public class CategoryController {
 
         return new ResponseEntity(booksByCategory, HttpStatus.OK);
     }
-
 }
