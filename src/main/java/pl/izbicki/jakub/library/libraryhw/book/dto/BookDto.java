@@ -1,6 +1,7 @@
 package pl.izbicki.jakub.library.libraryhw.book.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class BookDto {
     private String title;
     private String subtitle;
     private String publisher;
+    @ApiModelProperty("Presented as a UNIX timestamp.")
     private Long publishedDate;
     private String description;
     private Integer pageCount;
