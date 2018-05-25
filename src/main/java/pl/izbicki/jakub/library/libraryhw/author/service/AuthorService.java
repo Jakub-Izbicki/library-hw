@@ -47,6 +47,7 @@ public class AuthorService {
                 .filter(book -> book.getAuthors().contains(author))
                 .filter(book -> book.getAverageRating().isPresent())
                 .mapToDouble(book -> book.getAverageRating().get())
-                .average().getAsDouble();
+                .average()
+                .getAsDouble();
     }
 }

@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Objects.nonNull;
-
 @Getter
 @Setter
 public class VolumeInfo {
@@ -39,11 +37,8 @@ public class VolumeInfo {
     private String canonicalVolumeLink;
 
     public Optional<Long> getPublishedDate() {
-        if (nonNull(publishedDate)) {
-            return Optional.of(parseDate());
-        }
-
-        return Optional.empty();
+        return Optional.ofNullable(publishedDate)
+                .map(date -> parseDate());
     }
 
     private Long parseDate() {

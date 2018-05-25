@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Getter
@@ -55,21 +54,14 @@ public class Book {
     }
 
     private String provideIndustryIdentifierOrId() {
-        if (isIdentifiersMissing()) {
-            return id;
-        }
 
-        final Optional<IndustryIdentifier> isbn = volumeInfo.getIndustryIdentifiers()
+        return Optional.ofNullable(volumeInfo)
+                .map(VolumeInfo::getIndustryIdentifiers)
+                .orElse(Collections.emptyList())
                 .stream()
                 .filter(ISBN_IDENTIFIER)
-                .findAny();
-
-        return isbn.isPresent() ? isbn.get().getIdentifier() : id;
-    }
-
-    private boolean isIdentifiersMissing() {
-        return isNull(volumeInfo)
-                || isNull(volumeInfo.getIndustryIdentifiers())
-                || volumeInfo.getIndustryIdentifiers().isEmpty();
+                .findAny()
+                .map(IndustryIdentifier::getIdentifier)
+                .orElse(id);
     }
 }
